@@ -32,7 +32,7 @@ Thank you,
 [YOUR NAME]
 Bayou Claims Group
 [Phone]
-bayou.claim.group@gmail.com
+info@bayou-claims.org
 
 ---
 

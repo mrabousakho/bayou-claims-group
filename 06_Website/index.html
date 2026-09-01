@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bayou Claims Group — Harris County Excess Proceeds Research</title>
+<meta name="description" content="Free research to find out if Harris County is holding excess proceeds from a tax foreclosure sale that belongs to you. Not a law firm, no contingency fees.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%232C4A44'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23A8823A' stroke-width='4'/%3E%3Ctext x='32' y='40' font-family='Georgia,serif' font-size='24' fill='%23A8823A' text-anchor='middle'%3E%24%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bayou Claims Group — Harris County Excess Proceeds Research">
+<meta property="og:description" content="Free research to find out if Harris County is holding excess proceeds from a tax foreclosure sale that belongs to you.">
+<meta property="og:url" content="https://bayou-claims.org/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bayou Claims Group — Harris County Excess Proceeds Research">
+<meta name="twitter:description" content="Free research to find out if Harris County is holding excess proceeds from a tax foreclosure sale that belongs to you.">
 <style>
   :root{
     --ledger: #F5F1E6;
@@ -27,12 +36,17 @@
     display:flex;
     justify-content:space-between;
     align-items:baseline;
+    flex-wrap: wrap;
+    gap: 10px 22px;
   }
   .wordmark{ font-size: 20px; letter-spacing: 0.02em; }
   .wordmark b{ color: var(--bayou); }
   nav.sans{ font-size: 14px; color: var(--bayou); }
   nav a{ color: inherit; text-decoration:none; margin-left: 22px; }
   nav a:hover{ text-decoration: underline; }
+  @media (max-width: 560px){
+    nav a{ margin-left: 0; margin-right: 16px; display:inline-block; }
+  }
 
   .hero{
     padding: 6vw 6vw 5vw;
@@ -136,6 +150,46 @@
     max-width: 760px;
   }
   footer p{ margin-bottom: 10px; }
+  footer .links a{ color: var(--bayou); margin-right: 16px; }
+
+  .about{
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 7vw 6vw;
+  }
+  .about-inner{ max-width: 760px; }
+  .about h2{ font-size: 26px; color: var(--bayou); font-weight: 500; margin-bottom: 20px; }
+  .about p{ font-family:'Helvetica Neue', Arial, sans-serif; font-size: 16px; color: #3c4a48; margin-bottom: 14px; max-width: 62ch; }
+
+  details.faq{
+    border-top: 1px solid var(--line);
+    padding: 16px 0;
+    font-family:'Helvetica Neue', Arial, sans-serif;
+  }
+  details.faq:last-child{ border-bottom: 1px solid var(--line); }
+  details.faq summary{
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    list-style: none;
+  }
+  details.faq summary::-webkit-details-marker{ display:none; }
+  details.faq summary::before{ content: "+ "; color: var(--brass); font-weight:700; }
+  details.faq[open] summary::before{ content: "– "; }
+  details.faq p{ font-size: 14.5px; color: #4a5250; margin-top: 10px; max-width: 60ch; }
+
+  .intake-form{ max-width: 480px; font-family:'Helvetica Neue', Arial, sans-serif; }
+  .intake-form label{ display:block; font-size: 13px; color: #6b6252; margin: 14px 0 5px; }
+  .intake-form input, .intake-form select{
+    width:100%; padding: 10px 12px; border:1px solid var(--line); border-radius:3px;
+    font-family: inherit; font-size:14px; background: var(--paper);
+  }
+  .intake-form button{
+    margin-top: 20px; padding: 12px 24px; border-radius:3px; border:1px solid var(--bayou);
+    background: var(--bayou); color: var(--paper); font-size:15px; cursor:pointer;
+  }
 </style>
 </head>
 <body>
@@ -144,7 +198,9 @@
   <div class="wordmark">Bayou Claims <b>Group</b></div>
   <nav class="sans">
     <a href="#process">How it works</a>
+    <a href="#about">About</a>
     <a href="#attorneys">Find an attorney</a>
+    <a href="#faq">FAQ</a>
     <a href="#notice">Important notice</a>
   </nav>
 </header>
@@ -243,6 +299,30 @@
   </div>
 </section>
 
+<div class="about" id="about">
+  <div class="about-inner">
+    <h2>Who we are</h2>
+    <p>
+      Bayou Claims Group was started by a small group of Harris County natives — people who grew
+      up here, went through school here, and have seen up close how much money the system quietly
+      holds onto simply because the person it belongs to never found out it existed.
+    </p>
+    <p>
+      Excess proceeds sit in a court registry, not a mailbox. Finding out you're owed money means
+      knowing which government office to ask, what a "cause number" is, and how to read a case
+      file — none of which is obvious, and none of which should stand between someone and money
+      that's already legally theirs. We built this because the people most likely to be owed
+      these funds are often the least likely to have the time, connections, or information to go
+      looking for them.
+    </p>
+    <p>
+      We're not attorneys, and we don't pretend to be. What we do is the unglamorous part —
+      reading registries, cross-checking case numbers, tracking deadlines — so that by the time
+      it reaches you, claiming what's yours is a lot less intimidating.
+    </p>
+  </div>
+</div>
+
 <section class="explain" id="attorneys">
   <h2>Texas attorneys who handle excess-proceeds petitions</h2>
   <p class="sans" style="font-size:15px; color:#4a5250; max-width:60ch; margin-bottom:24px;">
@@ -258,9 +338,69 @@
     </p>
   </div>
 
-  <a class="btn ghost" href="mailto:info@bayou-claims.org?subject=Attorney%20Directory%20Listing%20Request" style="display:inline-block; font-family:'Helvetica Neue',Arial,sans-serif;">
-    Apply for a directory listing →
-  </a>
+  <form class="intake-form" id="attorneyForm" onsubmit="return submitAttorneyForm(event)">
+    <label for="atName">Full name</label>
+    <input type="text" id="atName" required>
+    <label for="atBar">Texas State Bar number</label>
+    <input type="text" id="atBar" required>
+    <label for="atArea">Practice area</label>
+    <input type="text" id="atArea" placeholder="e.g. Tax law, real estate litigation" required>
+    <label for="atEmail">Contact email</label>
+    <input type="email" id="atEmail" required>
+    <label for="atPhone">Contact phone</label>
+    <input type="tel" id="atPhone" required>
+    <button type="submit">Submit application →</button>
+  </form>
+  <script>
+    function submitAttorneyForm(e){
+      e.preventDefault();
+      const name = document.getElementById('atName').value;
+      const bar = document.getElementById('atBar').value;
+      const area = document.getElementById('atArea').value;
+      const email = document.getElementById('atEmail').value;
+      const phone = document.getElementById('atPhone').value;
+      const body = `Name: ${name}%0ATexas State Bar No.: ${bar}%0APractice area: ${area}%0AContact email: ${email}%0AContact phone: ${phone}`;
+      window.location.href = `mailto:info@bayou-claims.org?subject=Attorney%20Directory%20Listing%20Request&body=${body}`;
+      return false;
+    }
+  </script>
+</section>
+
+<section class="explain" id="faq">
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq">
+    <summary>Is this a scam?</summary>
+    <p>No — but you should be skeptical of anyone contacting you about money you're "owed,"
+    including us, and verify independently. Everything we reference is public record. You can
+    look up any case yourself, for free, using the Harris County District Clerk's own search
+    tool (linked below) before trusting anything we send you.</p>
+  </details>
+  <details class="faq">
+    <summary>Why should I pay you instead of just doing this myself?</summary>
+    <p>You don't have to — the county, the case search, and the law library are all free and
+    open to the public. We charge a flat fee for the time it takes to find, verify, and package a
+    case, as an option for people who'd rather not do that legwork themselves. You're always free
+    to file directly.</p>
+  </details>
+  <details class="faq">
+    <summary>Do you take a percentage of what I recover?</summary>
+    <p>No. Texas law (Tax Code §34.04(i)) only allows licensed attorneys to charge a fee
+    contingent on recovering excess proceeds. We're not attorneys, so we don't do that — our fee,
+    if any, is flat and paid up front for the research itself, regardless of outcome.</p>
+  </details>
+  <details class="faq">
+    <summary>What happens to my information?</summary>
+    <p>See our <a href="privacy.html">Privacy Policy</a> for the full detail. Short version: we
+    collect only what's needed to verify a case, we don't sell personal information, and you can
+    ask us to delete your record at any time.</p>
+  </details>
+  <details class="faq">
+    <summary>How do I know if the county is holding money for me?</summary>
+    <p>Use the <a href="https://www.hcdistrictclerk.com/edocs/public/search.aspx" target="_blank" rel="noopener">District Clerk's Search Records tool</a>
+    directly, or contact the Accounting Section at court.registry@hcdistrictclerk.com /
+    832-927-5800.</p>
+  </details>
 </section>
 
 <div class="notice" id="notice">
@@ -274,7 +414,7 @@
     </p>
     <p>
       You can always look up and claim these funds yourself, at no cost beyond court filing fees,
-      using the <a href="#">Harris County District Clerk's Search Records tool</a> and the
+      using the <a href="https://www.hcdistrictclerk.com/edocs/public/search.aspx" target="_blank" rel="noopener">Harris County District Clerk's Search Records tool</a> and the
       self-help resources at the Harris County Law Library, 1019 Congress, Houston.
     </p>
   </div>
@@ -286,6 +426,7 @@
   structure — do not treat anything here as a final offer of services.</p>
   <p>Public records requests: court.registry@hcdistrictclerk.com · District Clerk: 832-927-5800</p>
   <p>Contact Bayou Claims Group: info@bayou-claims.org</p>
+  <p class="links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></p>
 </footer>
 
 </body>
