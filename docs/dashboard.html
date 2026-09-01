@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bayou Claims Group — Daily Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+<style>
+  :root{
+    --bayou:#2C4A44; --brass:#A8823A; --ledger:#F5F1E6; --paper:#FFFDF7;
+    --ink:#1B2B2A; --line:#E4DCC6; --pos:#2C4A44; --neg:#A8402F;
+    --radius:6px; --gap:18px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--ledger); color:var(--ink);
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    padding: 24px; max-width:1280px; margin:0 auto;
+  }
+  header.top{
+    background:var(--bayou); color:var(--paper);
+    padding:20px 26px; border-radius:var(--radius);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px; margin-bottom:var(--gap);
+  }
+  header.top h1{ font-size:19px; font-weight:600; font-family: Georgia, serif; }
+  header.top .sub{ font-size:12px; opacity:0.75; margin-top:3px; }
+  header.top .asof{ font-size:13px; opacity:0.85; }
+
+  .kpi-row{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:var(--gap); margin-bottom:var(--gap);
+  }
+  .kpi-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 20px;
+  }
+  .kpi-label{ font-size:12px; color:#7a7261; text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px;}
+  .kpi-value{ font-size:26px; font-weight:700; color:var(--bayou); font-family: Georgia, serif;}
+  .kpi-note{ font-size:12px; color:#7a7261; margin-top:4px;}
+
+  .row{ display:grid; grid-template-columns: 1.2fr 0.8fr; gap:var(--gap); margin-bottom:var(--gap);}
+  @media (max-width:860px){ .row{ grid-template-columns:1fr; } }
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 20px;
+  }
+  .card h3{ font-size:14px; margin-bottom:14px; color:var(--ink);}
+  canvas{ max-height:260px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  th{
+    text-align:left; padding:9px 10px; border-bottom:2px solid var(--line);
+    color:#7a7261; font-size:11px; text-transform:uppercase; letter-spacing:.03em;
+  }
+  td{ padding:9px 10px; border-bottom:1px solid var(--line); }
+  tr:hover td{ background:#FBF8EF; }
+  .pill{ display:inline-block; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:600;}
+  .pill.researching{ background:#EFE6C8; color:#7a5c14; }
+  .pill.verified{ background:#DCE9E4; color:var(--bayou); }
+  .pill.ready{ background:#DDEBE8; color:#1c6a54; }
+  .pill.hold{ background:#F3DAD3; color:var(--neg); }
+
+  .deadline-row{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-size:13px;}
+  .deadline-row:last-child{ border-bottom:none; }
+  .deadline-days{ font-weight:600; color:var(--brass); }
+
+  footer{ font-size:12px; color:#8a8272; text-align:center; padding:20px 0 6px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <h1>Bayou Claims Group — Daily Dashboard</h1>
+    <div class="sub">Harris County excess-proceeds pipeline</div>
+  </div>
+  <div class="asof">As of <span id="asof"></span></div>
+</header>
+
+<section class="kpi-row" id="kpis"></section>
+
+<section class="row">
+  <div class="card">
+    <h3>Cases by status</h3>
+    <canvas id="statusChart"></canvas>
+  </div>
+  <div class="card">
+    <h3>Upcoming filing deadlines</h3>
+    <div id="deadlines"></div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="card">
+    <h3>Potential value by model</h3>
+    <canvas id="modelChart"></canvas>
+  </div>
+  <div class="card">
+    <h3>New cases logged (last 8 weeks)</h3>
+    <canvas id="trendChart"></canvas>
+  </div>
+</section>
+
+<section class="card">
+  <h3>Case pipeline (sample data — replace with the live tracker)</h3>
+  <table>
+    <thead>
+      <tr><th>Cause No.</th><th>Property</th><th>Amount</th><th>Deadline</th><th>Status</th><th>Model</th></tr>
+    </thead>
+    <tbody id="caseTable"></tbody>
+  </table>
+</section>
+
+<footer>
+  This dashboard runs on sample data shaped like the case tracker. Replace SAMPLE_DATA below with
+  an export from Excess_Proceeds_Case_Tracker.xlsx to see real numbers — see README in this
+  folder for how.
+</footer>
+
+<script>
+// ---- Sample data, matching the tracker schema (05_Tracker) ----
+const SAMPLE_DATA = [
+  {cause:"2024-12345", prop:"123 Bayou St", amount:8250, deadline:"2026-03-05", status:"Researching", model:"Data model"},
+  {cause:"2024-10981", prop:"887 Telephone Rd", amount:14320, deadline:"2026-01-18", status:"Verified", model:"Data model"},
+  {cause:"2024-11220", prop:"52 Munger St", amount:3100, deadline:"2026-04-02", status:"On Hold", model:"Hold"},
+  {cause:"2023-09876", prop:"301 Yale St", amount:22750, deadline:"2025-11-30", status:"Ready", model:"Attorney model"},
+  {cause:"2024-13502", prop:"77 Wayside Dr", amount:5600, deadline:"2026-06-14", status:"Researching", model:"Data model"},
+  {cause:"2023-08820", prop:"440 Harrisburg Blvd", amount:31900, deadline:"2025-09-22", status:"Closed", model:"Attorney model"},
+  {cause:"2024-14110", prop:"19 Studewood St", amount:9875, deadline:"2026-02-27", status:"Verified", model:"Data model"},
+];
+
+document.getElementById("asof").textContent = new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+
+// KPIs
+const active = SAMPLE_DATA.filter(d=>d.status!=="Closed");
+const totalValue = active.reduce((s,d)=>s+d.amount,0);
+const onHold = SAMPLE_DATA.filter(d=>d.status==="On Hold").length;
+const ready = SAMPLE_DATA.filter(d=>d.status==="Ready").length;
+const kpis = [
+  {label:"Active cases", value: active.length, note: `${SAMPLE_DATA.length} total logged`},
+  {label:"Total value in pipeline", value: "$"+totalValue.toLocaleString(), note:"Active cases only"},
+  {label:"Ready to hand off", value: ready, note:"Packaged for next step"},
+  {label:"On hold", value: onHold, note:"Needs licensing/attorney sign-off"},
+];
+document.getElementById("kpis").innerHTML = kpis.map(k=>`
+  <div class="kpi-card">
+    <div class="kpi-label">${k.label}</div>
+    <div class="kpi-value">${k.value}</div>
+    <div class="kpi-note">${k.note}</div>
+  </div>`).join("");
+
+// Status chart
+const statusCounts = {};
+SAMPLE_DATA.forEach(d=>{ statusCounts[d.status]=(statusCounts[d.status]||0)+1; });
+new Chart(document.getElementById("statusChart"), {
+  type:"doughnut",
+  data:{ labels:Object.keys(statusCounts), datasets:[{
+    data:Object.values(statusCounts),
+    backgroundColor:["#EFE6C8","#DCE9E4","#DDEBE8","#F3DAD3","#C9BFA6"]
+  }]},
+  options:{ plugins:{ legend:{ position:"bottom", labels:{ boxWidth:10, font:{size:11} } } } }
+});
+
+// Model chart
+const modelValue = {};
+active.forEach(d=>{ modelValue[d.model]=(modelValue[d.model]||0)+d.amount; });
+new Chart(document.getElementById("modelChart"), {
+  type:"bar",
+  data:{ labels:Object.keys(modelValue), datasets:[{
+    data:Object.values(modelValue), backgroundColor:"#2C4A44", borderRadius:4
+  }]},
+  options:{ plugins:{legend:{display:false}}, scales:{ y:{ ticks:{ callback:v=>"$"+v.toLocaleString() } } } }
+});
+
+// Trend chart (sample)
+new Chart(document.getElementById("trendChart"), {
+  type:"line",
+  data:{
+    labels:["Wk -7","Wk -6","Wk -5","Wk -4","Wk -3","Wk -2","Wk -1","This wk"],
+    datasets:[{ data:[1,0,2,1,3,2,4,3], borderColor:"#A8823A", backgroundColor:"#A8823A20", fill:true, tension:0.3 }]
+  },
+  options:{ plugins:{legend:{display:false}} }
+});
+
+// Deadlines
+const today = new Date();
+const upcoming = SAMPLE_DATA
+  .filter(d=>d.status!=="Closed")
+  .map(d=>({...d, days: Math.round((new Date(d.deadline)-today)/86400000)}))
+  .sort((a,b)=>a.days-b.days)
+  .slice(0,5);
+document.getElementById("deadlines").innerHTML = upcoming.map(d=>`
+  <div class="deadline-row">
+    <span>${d.cause} — ${d.prop}</span>
+    <span class="deadline-days">${d.days} days</span>
+  </div>`).join("");
+
+// Table
+const statusClass = {"Researching":"researching","Verified":"verified","Ready":"ready","On Hold":"hold","Closed":"hold"};
+document.getElementById("caseTable").innerHTML = SAMPLE_DATA.map(d=>`
+  <tr>
+    <td>${d.cause}</td><td>${d.prop}</td><td>$${d.amount.toLocaleString()}</td>
+    <td>${d.deadline}</td>
+    <td><span class="pill ${statusClass[d.status]||''}">${d.status}</span></td>
+    <td>${d.model}</td>
+  </tr>`).join("");
+</script>
+</body>
+</html>

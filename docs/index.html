@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bayou Claims Group — Harris County Excess Proceeds Research</title>
+<style>
+  :root{
+    --ledger: #F5F1E6;
+    --ink: #1B2B2A;
+    --bayou: #2C4A44;
+    --brass: #A8823A;
+    --line: #C9BFA6;
+    --paper: #FFFDF7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--ledger);
+    color: var(--ink);
+    font-family: 'Iowan Old Style','Georgia', serif;
+    line-height: 1.5;
+  }
+  .sans{ font-family: 'Helvetica Neue', Arial, sans-serif; }
+  header{
+    border-bottom: 1px solid var(--line);
+    padding: 28px 6vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .wordmark{ font-size: 20px; letter-spacing: 0.02em; }
+  .wordmark b{ color: var(--bayou); }
+  nav.sans{ font-size: 14px; color: var(--bayou); }
+  nav a{ color: inherit; text-decoration:none; margin-left: 22px; }
+  nav a:hover{ text-decoration: underline; }
+
+  .hero{
+    padding: 6vw 6vw 5vw;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .hero .kicker{
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--brass);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .hero h1{
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--bayou);
+    max-width: 16ch;
+  }
+  .hero p{
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 17px;
+    max-width: 52ch;
+    margin-top: 18px;
+    color: #3c4a48;
+  }
+  .hero .cta{
+    display:flex;
+    gap: 16px;
+    margin-top: 28px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  .hero-art{ width: 100%; height: auto; }
+  @media (max-width: 760px){
+    .hero{ grid-template-columns: 1fr; }
+    .hero-art{ order: -1; max-width: 280px; margin: 0 auto; }
+  }
+  .btn{
+    padding: 13px 24px;
+    border-radius: 3px;
+    font-size: 15px;
+    text-decoration: none;
+    border: 1px solid var(--bayou);
+  }
+  .btn.primary{ background: var(--bayou); color: var(--paper); }
+  .btn.ghost{ color: var(--bayou); }
+
+  .strip{
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 40px 6vw;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+  }
+  .strip div{ font-family:'Helvetica Neue', Arial, sans-serif; }
+  .strip .num{ font-size: 30px; color: var(--bayou); font-family: 'Iowan Old Style', Georgia, serif;}
+  .strip .lbl{ font-size: 13px; color: #6b6252; margin-top: 4px;}
+
+  section.explain{
+    padding: 7vw 6vw;
+    max-width: 900px;
+  }
+  section.explain h2{
+    font-size: 28px;
+    color: var(--bayou);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .step{
+    display:grid;
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .step:last-child{ border-bottom: 1px solid var(--line); }
+  .step .mark{ font-size: 22px; color: var(--brass); }
+  .step h3{ font-size: 19px; font-weight: 600; color: var(--ink); margin-bottom: 6px;}
+  .step p{ font-family:'Helvetica Neue', Arial, sans-serif; font-size: 15px; color: #4a5250; max-width: 56ch;}
+
+  .notice{
+    background: var(--bayou);
+    color: var(--paper);
+    padding: 6vw;
+  }
+  .notice-inner{ max-width: 760px; font-family:'Helvetica Neue', Arial, sans-serif; }
+  .notice h2{ font-family:'Iowan Old Style', Georgia, serif; font-size: 24px; margin-bottom: 16px; font-weight: 500;}
+  .notice p{ font-size: 15px; opacity: 0.92; margin-bottom: 12px;}
+  .notice a{ color: #E9D9B0; }
+
+  footer{
+    padding: 5vw 6vw;
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    color: #6b6252;
+    max-width: 760px;
+  }
+  footer p{ margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">Bayou Claims <b>Group</b></div>
+  <nav class="sans">
+    <a href="#process">How it works</a>
+    <a href="#attorneys">Find an attorney</a>
+    <a href="#notice">Important notice</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="kicker sans">HARRIS COUNTY, TEXAS · COURT REGISTRY RESEARCH</div>
+    <h1>Find out if the county is holding money from a tax foreclosure sale.</h1>
+    <p>
+      When a property sells for more than what was owed, the leftover — the "excess proceeds" —
+      sits in the Harris County District Clerk's registry until someone claims it. We research
+      which cases have unclaimed funds and who they belong to.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#process">See how the research works</a>
+      <a class="btn ghost" href="#notice">Read the fine print first</a>
+    </div>
+  </div>
+  <svg class="hero-art" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A stylized ledger and courthouse column beside a winding bayou.">
+    <rect x="0" y="0" width="340" height="340" fill="none"/>
+    <!-- winding bayou -->
+    <path d="M -10 250 C 60 220, 90 280, 160 250 S 260 200, 350 240" stroke="#7FA39A" stroke-width="10" fill="none" opacity="0.5"/>
+    <path d="M -10 265 C 70 240, 100 295, 170 268 S 270 220, 350 258" stroke="#A8823A" stroke-width="3" fill="none" opacity="0.4"/>
+    <!-- courthouse column -->
+    <g transform="translate(70,40)">
+      <rect x="0" y="0" width="70" height="14" fill="#2C4A44"/>
+      <rect x="6" y="14" width="58" height="150" fill="none" stroke="#2C4A44" stroke-width="3"/>
+      <line x1="6" y1="30" x2="64" y2="30" stroke="#2C4A44" stroke-width="2"/>
+      <line x1="6" y1="46" x2="64" y2="46" stroke="#2C4A44" stroke-width="2"/>
+      <line x1="6" y1="62" x2="64" y2="62" stroke="#2C4A44" stroke-width="2"/>
+      <line x1="6" y1="78" x2="64" y2="78" stroke="#2C4A44" stroke-width="2"/>
+      <rect x="-6" y="164" width="82" height="12" fill="#2C4A44"/>
+    </g>
+    <!-- ledger card -->
+    <g transform="translate(150,150)">
+      <rect x="0" y="0" width="150" height="110" rx="3" fill="#FFFDF7" stroke="#A8823A" stroke-width="2"/>
+      <line x1="14" y1="24" x2="136" y2="24" stroke="#C9BFA6" stroke-width="2"/>
+      <line x1="14" y1="42" x2="120" y2="42" stroke="#C9BFA6" stroke-width="2"/>
+      <line x1="14" y1="60" x2="128" y2="60" stroke="#C9BFA6" stroke-width="2"/>
+      <line x1="14" y1="78" x2="110" y2="78" stroke="#C9BFA6" stroke-width="2"/>
+      <circle cx="120" cy="94" r="14" fill="none" stroke="#A8823A" stroke-width="2.5"/>
+      <text x="120" y="99" font-family="Georgia, serif" font-size="16" fill="#A8823A" text-anchor="middle">$</text>
+    </g>
+  </svg>
+</section>
+
+<div class="strip">
+  <div>
+    <div class="num">2 yrs</div>
+    <div class="lbl">Harris County holds excess proceeds before they're forfeited</div>
+  </div>
+  <div>
+    <div class="num">$25+</div>
+    <div class="lbl">Threshold that triggers a certified-mail notice to the former owner</div>
+  </div>
+  <div>
+    <div class="num">201 Caroline</div>
+    <div class="lbl">Ste 210, Houston — the Accounting Section that holds the registry</div>
+  </div>
+</div>
+
+<section class="explain" id="process">
+  <h2>What we actually do</h2>
+  <div class="step">
+    <div class="mark">1</div>
+    <div>
+      <h3>Request the registry</h3>
+      <p>We file a public information request for the current excess-proceeds list held by the
+      Harris County District Clerk.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="mark">2</div>
+    <div>
+      <h3>Verify each case</h3>
+      <p>We cross-check cause numbers, sale dates, and filing deadlines against the District
+      Clerk's own case search, so the list we work from is current, not stale.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="mark">3</div>
+    <div>
+      <h3>Trace the former owner using public records</h3>
+      <p>Appraisal district and county clerk deed records only — we don't run private database
+      searches to locate people, which keeps this a research service rather than a licensed
+      investigations business.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="mark">4</div>
+    <div>
+      <h3>Hand you the file</h3>
+      <p>You get the case number, amount, deadline, and a documentation checklist — enough to
+      file the petition yourself or take to an attorney of your choosing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="explain" id="attorneys">
+  <h2>Texas attorneys who handle excess-proceeds petitions</h2>
+  <p class="sans" style="font-size:15px; color:#4a5250; max-width:60ch; margin-bottom:24px;">
+    A self-serve, flat-fee directory — we don't match, screen, or recommend any attorney over
+    another. Browse and contact directly. Attorneys: see below to apply for a listing.
+  </p>
+
+  <div style="border:1px solid var(--line); border-radius:3px; padding:20px 22px; background:var(--paper); margin-bottom:14px;">
+    <div class="sans" style="font-size:13px; color:var(--brass); margin-bottom:6px;">NO LISTINGS YET</div>
+    <p class="sans" style="font-size:14px; color:#6b6252;">
+      This directory is new — the first attorneys to apply will appear here. Each listing will
+      show name, State Bar number, practice area, and direct contact info only.
+    </p>
+  </div>
+
+  <a class="btn ghost" href="mailto:bayou.claim.group@gmail.com?subject=Attorney%20Directory%20Listing%20Request" style="display:inline-block; font-family:'Helvetica Neue',Arial,sans-serif;">
+    Apply for a directory listing →
+  </a>
+</section>
+
+<div class="notice" id="notice">
+  <div class="notice-inner">
+    <h2>Read this before anything else</h2>
+    <p>
+      Under Texas Tax Code §34.04(i), only a licensed attorney may charge a fee to obtain excess
+      proceeds on someone's behalf — capped at 25% of the recovery or $1,000, whichever is less.
+      We are not attorneys and we do not file petitions or charge a fee contingent on what you
+      recover.
+    </p>
+    <p>
+      You can always look up and claim these funds yourself, at no cost beyond court filing fees,
+      using the <a href="#">Harris County District Clerk's Search Records tool</a> and the
+      self-help resources at the Harris County Law Library, 1019 Congress, Houston.
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p>Bayou Claims Group is a records-research service, not a law firm, and does not provide legal
+  advice. This page is a working draft pending attorney review of the underlying business
+  structure — do not treat anything here as a final offer of services.</p>
+  <p>Public records requests: court.registry@hcdistrictclerk.com · District Clerk: 832-927-5800</p>
+  <p>Contact Bayou Claims Group: bayou.claim.group@gmail.com</p>
+</footer>
+
+</body>
+</html>
